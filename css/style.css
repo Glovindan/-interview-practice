@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+header {
+    background-color: #1c1c1c;
+}
+header h1{
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0 30vw 20px 30vw;
+
+    font-size: 40px;
+    font-weight: 500;
+}
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.question-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    -webkit-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+    -moz-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+    box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+}
+
+.question-title {
+    padding: 1.5vh 2vh;
+    color: white;
+    background: #1c1c1c;
+    text-align: center;
+
+    font-weight: normal;
+    font-style: italic;
+}
+
+.question-answer-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    margin: 1.5vh 2vh 2vh 2vh;
+}
+
+.question-answer {
+    transition: all .2s;
+
+    display: flex;
+    gap: 1.5vh;
+    align-items: center;
+    border: gray 0.2vh solid;
+    padding: 1.5vh;
+    border-radius: 25px;
+    cursor: pointer;
+
+    font-weight: 300;
+    color: gray;
+}
+
+.button-checked {
+    transition: .2s;
+
+    background-color: #0066cc;
+    border-color:  #0066cc;
+    color: white;
+}
+
+
+.question-answer-checkbox {
+    transition: all .2s;
+    width: 15px;
+    height: 15px;
+    border-radius: 20%;
+    border: gray 0.2vh solid;
+}
+.question-answer-checkbox img{
+    height: inherit;
+    width: inherit;
+    display: block;
+}
+.checkbox-checked {
+    transition: all .2s;
+    border: white 0.2vh solid;
+}
+
+.radio {
+    border-radius: 100%;
+}
+
+
+:checked + label {
+    background: red;
+}
+
+@media (max-device-width: 600px) {
+    header h1{
+        text-align: center;
+        margin: 0 0 2vh;
+        font-size: 4.5vh;
+        overflow-wrap: break-word;
+    }
+
+    .question-wrapper {
+        width: 90vw;
+        font-size: 1.9vh;
+        border-radius: 75px;
+        box-shadow: 0px 0px 15px -2px rgba(34, 60, 80, 0.6);
+    }
+
+    .question-answer {
+        border-radius: 75px;
+    }
+
+    .question-answer-checkbox {
+        width: 5vw;
+        height: 5vw;
+    }
+}
