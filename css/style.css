@@ -65,6 +65,20 @@ main {
     color: gray;
 }
 
+.question-answer-checkbox {
+    width: 10px;
+    height: 10px;
+    border-radius: 1px;
+    border: gray 0.2vh solid;
+}
+
+.question-answer-ratio {
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
+    border: gray 0.2vh solid;
+}
+
 :checked + label {
     background: red;
 }
@@ -87,6 +101,7 @@ main {
     .question-answer {
         border-radius: 50px;
     }
+
     .question-answer input {
         height: 30px;
         width: 5%;
