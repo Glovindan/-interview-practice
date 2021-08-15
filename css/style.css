@@ -53,6 +53,8 @@ main {
 }
 
 .question-answer {
+    transition: all .2s;
+
     display: flex;
     gap: 1.5vh;
     align-items: center;
@@ -65,19 +67,36 @@ main {
     color: gray;
 }
 
-.question-answer-checkbox {
-    width: 10px;
-    height: 10px;
-    border-radius: 1px;
-    border: gray 0.2vh solid;
+.button-checked {
+    transition: .2s;
+
+    background-color: #0066cc;
+    border-color:  #0066cc;
+    color: white;
 }
 
-.question-answer-ratio {
-    width: 10px;
-    height: 10px;
-    border-radius: 20px;
+
+.question-answer-checkbox {
+    transition: all .2s;
+    width: 15px;
+    height: 15px;
+    border-radius: 20%;
     border: gray 0.2vh solid;
 }
+.question-answer-checkbox img{
+    height: inherit;
+    width: inherit;
+    display: block;
+}
+.checkbox-checked {
+    transition: all .2s;
+    border: white 0.2vh solid;
+}
+
+.radio {
+    border-radius: 100%;
+}
+
 
 :checked + label {
     background: red;
@@ -94,21 +113,16 @@ main {
     .question-wrapper {
         width: 90vw;
         font-size: 1.9vh;
-        border-radius: 50px;
+        border-radius: 75px;
         box-shadow: 0px 0px 15px -2px rgba(34, 60, 80, 0.6);
     }
 
     .question-answer {
-        border-radius: 50px;
+        border-radius: 75px;
     }
 
-    .question-answer input {
-        height: 30px;
-        width: 5%;
-    }
-
-    .question-answer span {
-        width: 95%;
-        overflow-wrap: break-word;
+    .question-answer-checkbox {
+        width: 5vw;
+        height: 5vw;
     }
 }
