@@ -3,7 +3,21 @@
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
+
+body::-webkit-scrollbar {
+    width: 1px;
+    background: #1c1c1c;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: white;
+}
+
 header {
     background-color: #1c1c1c;
 }
@@ -20,13 +34,38 @@ main {
     align-items: center;
     display: flex;
     flex-direction: column;
+
+    padding-bottom: 10px;
+}
+
+.main-wrapper {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
     gap: 2vh;
 }
 
+@keyframes addElement {
+    0% {
+        opacity: 0;
+        max-height: 0px;
+    }
+    15% {
+        opacity: 1;
+        max-height: 40px;
+    }
+    100% {
+        max-height: 1000px;
+    }
+}
+
 .question-wrapper {
+    animation: addElement 3s;
+    transition: all 1s;
+
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 100%;
     border-radius: 20px;
     overflow: hidden;
 
@@ -67,6 +106,7 @@ main {
     color: gray;
 }
 
+/*CHECKBOXES*/
 .button-checked {
     transition: .2s;
 
@@ -74,35 +114,95 @@ main {
     border-color:  #0066cc;
     color: white;
 }
-
-
 .question-answer-checkbox {
     transition: all .2s;
-    width: 15px;
-    height: 15px;
     border-radius: 20%;
     border: gray 0.2vh solid;
+    display: block;
 }
 .question-answer-checkbox img{
-    height: inherit;
-    width: inherit;
+    height: 15px;
+    padding: 2px;
     display: block;
 }
 .checkbox-checked {
     transition: all .2s;
     border: white 0.2vh solid;
 }
-
 .radio {
     border-radius: 100%;
 }
 
+/*BUTTONS*/
+.add-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: gray;
 
-:checked + label {
-    background: red;
+    border: gray 0.2vh solid;
+    padding: 1.5vh;
+    border-radius: 25px;
+    cursor: pointer;
 }
 
+    .add-question {
+        font-weight: normal;
+        font-style: italic;
+    }
+    .add-question:hover {
+        transition: all .2s ease-in;
+
+        background-color: #1c1c1c;
+        border-color: #1c1c1c;
+        color: white;
+    }
+
+    .add-answer {
+        font-weight: 300;
+        font-style: normal;
+    }
+    .add-answer:hover {
+        transition: all .2s ease-in;
+        background-color: #0066cc;
+        border-color: #0066cc;
+        color: white;
+    }
+
+.button-add-icon {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15pt;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 20px;
+    height: 20px;
+}
+
+.button-text {
+    width: 100%;
+    text-align: center;
+}
+
+
 @media (max-device-width: 600px) {
+    @keyframes addElement {
+        0% {
+            opacity: 0;
+            max-height: 0px;
+        }
+        15% {
+            opacity: 1;
+            max-height: 150px;
+        }
+        100% {
+            max-height: 3000px;
+        }
+    }
+
     header h1{
         text-align: center;
         margin: 0 0 2vh;
@@ -110,9 +210,38 @@ main {
         overflow-wrap: break-word;
     }
 
-    .question-wrapper {
+    .main-wrapper {
         width: 90vw;
-        font-size: 1.9vh;
+    }
+
+    .add-button {
+        border-radius: 75px;
+    }
+        .add-question:hover {
+            background-color: transparent;
+            border-color: gray;
+            color: gray;
+        }
+        .add-answer:hover {
+            background-color: transparent;
+            border-color: gray;
+            color: gray;
+        }
+
+        .add-question:active {
+            background-color: #1c1c1c;
+            border-color: #1c1c1c;
+            color: white;
+        }
+        .add-answer:active {
+            background-color: #0066cc;
+            border-color: #0066cc;
+            color: white;
+        }
+
+    .question-wrapper {
+
+        font-size: 2vh;
         border-radius: 75px;
         box-shadow: 0px 0px 15px -2px rgba(34, 60, 80, 0.6);
     }
@@ -121,8 +250,22 @@ main {
         border-radius: 75px;
     }
 
-    .question-answer-checkbox {
-        width: 5vw;
+    .question-answer-checkbox img{
         height: 5vw;
+        padding: .6vw;
+        display: block;
     }
+
+    .add-button {
+        font-size: 2vh;
+    }
+
+    .button-add-icon {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 3vh;
+        display: flex;
+    }
+
 }
+
