@@ -3,13 +3,13 @@ const checkboxOnClick = function() {
   $(this).children(':first-child').toggleClass('checkbox-checked');
 }
 
-const getAnswerMarkup = function(text) {
+const getAnswerMarkup = function(text = "") {
   let answer = `
     <div class="question-answer">
-        <div class="question-answer-checkbox radio">
+        <div class="question-answer-checkbox radio" >
             <img src="img/checkbox.svg" alt="">
         </div>
-        <div>${text}</div>
+        <div class="question-answer-text" contentEditable=true data-text="Введите вариант ответа">${text}</div>
     </div>`
 
   let htmlAnswer = $.parseHTML(answer);
@@ -34,22 +34,30 @@ const getAnswerMarkup = function(text) {
 //                         </div>
 //                         <div>Хуже</div>
 //                     </div>
-const getQuestionMarkup = function(title, answers = []) {
+const getQuestionMarkup = function(title = "", answers = []) {
   let answer =
             `<div class="question-wrapper">
-                <div class="question-title">
-                    ${title}
-                </div>
+                <div class="question-title" contentEditable=true data-text="Введите вопрос">${title}</div>
 
                 <div class="question-answer-wrapper">
                     
+                    <div class="add-button add-answer">
+                        <div class="button-add-icon">+</div>
+                        <div class="button-text">Добавить вариант ответа</div>
+                        <div class="button-add-icon">+</div>
+                    </div>
                 </div>
             </div>`;
   let htmlAnswer = $.parseHTML(answer)
+
+  $(htmlAnswer).children('.question-answer-wrapper').children('.add-answer').click(function() {
+    let answerTextHTML = getAnswerMarkup();
+    $(this).before(answerTextHTML)
+  })
+
   answers.forEach((answerText) => {
     let answerTextHTML = getAnswerMarkup(answerText);
-    $(answerTextHTML).click(checkboxOnClick);
-    $(htmlAnswer).children('.question-answer-wrapper').append(answerTextHTML);
+    $(htmlAnswer).children('.question-answer-wrapper').children('.add-answer').before(answerTextHTML);
   })
 
   return htmlAnswer;
@@ -58,10 +66,8 @@ const getQuestionMarkup = function(title, answers = []) {
 
 $('.add-question').click(function () {
   const mainWrapper = $('.main-wrapper');
-  let test = getQuestionMarkup("Жопа",["Ass","Boob","Soul"]);
-  $(test).toggleClass('question-wrapper-start');
-  $(test).toggleClass('question-wrapper-start');
-  console.log($(test).html())
+  let test = getQuestionMarkup();
+
   $(mainWrapper).children(':last-child').before(test);
 
   //Код снизу сопровождает добавляемый элемент
@@ -77,7 +83,7 @@ $('.add-question').click(function () {
   let interval = setInterval(() => {
     lastScrollTop = $(document).scrollTop();
     window.scrollTo(0,document.body.scrollHeight);
-  },1)
+  },4)
 })
 
 $('.question-answer').click(checkboxOnClick)
