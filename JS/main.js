@@ -3,44 +3,32 @@ const checkboxOnClick = function() {
   $(this).children(':first-child').toggleClass('checkbox-checked');
 }
 
-const getAnswerMarkup = function(text = "") {
-  let answer = `
-    <div class="question-answer">
-        <div class="question-answer-checkbox radio" >
-            <img src="img/checkbox.svg" alt="">
-        </div>
-        <div class="question-answer-text" contentEditable=true data-text="Введите вариант ответа">${text}</div>
-    </div>`
-
-  let htmlAnswer = $.parseHTML(answer);
-  return htmlAnswer;
+const addQuestion = function () {
+  const mainWrapper = $('.main-wrapper');
+  let questionMarkup = getQuestionMarkup("",[""]);
+  console.log($(questionMarkup).html())
+  $(mainWrapper).children(':last-child').before(questionMarkup);
 }
 
-//<div class="question-answer">
-//                         <div class="question-answer-checkbox radio">
-//                             <img src="img/checkbox.svg" alt="">
-//                         </div>
-//                         <div>Лучше</div>
-//                     </div>
-//                     <div class="question-answer">
-//                         <div class="question-answer-checkbox radio">
-//                             <img src="img/checkbox.svg" alt="">
-//                         </div>
-//                         <div>Не отличается</div>
-//                     </div>
-//                     <div class="question-answer">
-//                         <div class="question-answer-checkbox radio">
-//                             <img src="img/checkbox.svg" alt="">
-//                         </div>
-//                         <div>Хуже</div>
-//                     </div>
+const getAnswerMarkup = function(text = "") {
+  let answer = `
+    <div class="answer-wrapper">
+        <div class="question-answer">
+          <div class="question-answer-checkbox"></div>
+          <div class="question-answer-text" contentEditable=true myPlaceholder="Введите вариант ответа">${text}</div>
+        </div>
+    </div>`
+
+  return $.parseHTML(answer);
+}
+
+
 const getQuestionMarkup = function(title = "", answers = []) {
   let answer =
             `<div class="question-wrapper">
-                <div class="question-title" contentEditable=true data-text="Введите вопрос">${title}</div>
+                <div class="question-title" contentEditable=true myPlaceholder="Введите вопрос">${title}</div>
 
                 <div class="question-answer-wrapper">
-                    
                     <div class="add-button add-answer">
                         <div class="button-add-icon">+</div>
                         <div class="button-text">Добавить вариант ответа</div>
@@ -64,26 +52,6 @@ const getQuestionMarkup = function(title = "", answers = []) {
 }
 
 
-$('.add-question').click(function () {
-  const mainWrapper = $('.main-wrapper');
-  let test = getQuestionMarkup();
+$('.add-question').click(addQuestion)
 
-  $(mainWrapper).children(':last-child').before(test);
-
-  //Код снизу сопровождает добавляемый элемент
-  let lastScrollTop = $(document).scrollTop();
-  $(document).scroll(function (){
-    let scrollTop = $(this).scrollTop();
-
-    if(scrollTop < lastScrollTop) {
-      clearInterval(interval);
-      $(this).off('scroll');
-    }
-  })
-  let interval = setInterval(() => {
-    lastScrollTop = $(document).scrollTop();
-    window.scrollTo(0,document.body.scrollHeight);
-  },4)
-})
-
-$('.question-answer').click(checkboxOnClick)
+// $('.question-answer').click(checkboxOnClick)
