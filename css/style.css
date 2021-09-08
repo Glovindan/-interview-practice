@@ -3,6 +3,9 @@
     --glv-black: #1c1c1c;
     --glv-blue: #0066cc;
     --glv-red: #cc3d00;
+
+    --question-delete-size: 40px;
+    --answer-delete-size: 25px;
 }
 * {
     padding: 0;
@@ -13,7 +16,6 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
-
 .unselectable {
     user-select: none;
     -moz-user-select: none;
@@ -29,6 +31,10 @@ body::-webkit-scrollbar-thumb {
     background: white;
 }
 
+
+/************************/
+/*HEADER*/
+/************************/
 header {
     background-color: var(--glv-black);
 }
@@ -41,6 +47,11 @@ header h1{
     font-size: 40px;
     font-weight: 500;
 }
+
+
+/************************/
+/*MAIN*/
+/************************/
 main {
     align-items: center;
     display: flex;
@@ -48,24 +59,38 @@ main {
 
     padding-bottom: 10px;
 }
-
 .main-wrapper {
     width: 600px;
     display: flex;
     flex-direction: column;
     gap: 2vh;
+
+    font-size: medium;
 }
 
-@keyframes addElement {
+
+/************************/
+/*ANIMATIONS*/
+/************************/
+@keyframes fadeIn {
     0% {
-        max-height: 0;
+        opacity: 0;
     }
     100% {
-        max-height: 50vh;
+        opacity: 1;
     }
 }
 
-@keyframes addAnswer {
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes add{
     0% {
         max-height: 0;
     }
@@ -83,14 +108,11 @@ main {
     }
 }
 
-.answer-wrapper {
-    animation: addAnswer 1s ease-in-out;
-    overflow: hidden;
-}
 
+/************************/
+/*WRAPPERS*/
+/************************/
 .question-wrapper {
-    transition: all 1s;
-    
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -109,20 +131,26 @@ main {
 
     color: white;
     font-weight: normal;
-    font-size: medium;
     font-style: italic;
 }
 
-.question-answer-wrapper {
+.question-button-wrapper {
+    animation: add 1s ease-in-out;
+    --gap: 10px;
+    display: flex;
+    gap: var(--gap);
+    margin-right: calc(-1 * var(--question-delete-size) - var(--gap));
+}
+
+.answer-button-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5vh;
     margin: 1.5vh 2vh 2vh 2vh;
 }
 
-.question-answer {
+.answer-wrapper {
     overflow: hidden;
-    transition: all .2s;
     display: flex;
     gap: 1.5vh;
     align-items: center;
@@ -131,82 +159,42 @@ main {
     padding: 1.5vh;
 }
 
-.question-answer-text {
+.answer-text {
     font-weight: 300;
-    font-size: medium;
     color: gray;
     height: 100%;
     width: 100%;
     border: none;
 }
 
-.checkbox-wrapper {
+.answer-animation-wrapper {
+    animation: add 1s ease-in-out;
+    overflow: hidden;
+}
+
+/************************/
+/*ANSWER ELEMENTS WRAPPERS*/
+/************************/
+.answer-checkbox-wrapper {
     flex: 5%;
 }
-.text-wrapper {
+
+.answer-text-wrapper {
     width: 70%;
     flex: 90%;
 }
 
-.another-wrapper {
-    display: flex;
-    gap: 10px;
-
-    margin-right: -35px;
-    animation: addElement 1s ease-in-out;
-}
-
-.delete-wrapper {
+.answer-delete-wrapper {
     flex: 5%;
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.delete-question-wrapper {
-    flex: 5%;
-
-    display: flex;
-    margin-top: 20px;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.question-delete {
-    transition: all .2s;
-    border-radius: 50%;
-    /*border: gray 0.2vh solid;*/
-    height: 30px;
-    width: 30px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: var(--glv-black);
-    cursor: pointer;
-
-    -webkit-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
-    -moz-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
-    box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
-}
-
-.question-delete:hover {
-    background: #cc3d00;
-}
-
-.question-delete img{
-    height: 50%;
-    filter: invert(1);
-}
-.question-delete:hover img{
-    opacity: 1;
-    filter: invert(1);
-}
-
-/*CHECKBOXES*/
-.question-answer-checkbox {
+/************************/
+/*CHECKBOX*/
+/************************/
+.answer-checkbox {
     transition: all .2s;
     border-radius: 50%;
     border: gray 0.2vh solid;
@@ -214,7 +202,9 @@ main {
     width: 15px;
 }
 
-/*BUTTONS*/
+/************************/
+/*ADD BUTTONS*/
+/************************/
 .add-button {
     display: flex;
     align-items: center;
@@ -225,8 +215,12 @@ main {
     padding: 1.5vh;
     border-radius: 25px;
     cursor: pointer;
-}
 
+    font-size: inherit;
+}
+    /************************/
+    /*ADD QUESTION BUTTON*/
+    /************************/
     .add-question {
         font-weight: normal;
         font-style: italic;
@@ -239,6 +233,9 @@ main {
         color: white;
     }
 
+    /************************/
+    /*ADD ANSWER BUTTON*/
+    /************************/
     .add-answer {
         font-weight: 300;
         font-style: normal;
@@ -253,7 +250,6 @@ main {
 .button-add-icon {
     font-style: normal;
     font-weight: 300;
-    font-size: 15pt;
     display: flex;
 
     justify-content: center;
@@ -266,15 +262,17 @@ main {
 .button-text {
     width: 100%;
     text-align: center;
-
-    font-size: normal;
 }
 
-.question-answer-delete {
+
+/************************/
+/*DELETE ANSWER BUTTON*/
+/************************/
+.answer-delete {
     transition: all .2s;
     border-radius: 50%;
-    height: 25px;
-    width: 25px;
+    height: var(--answer-delete-size);
+    width: var(--answer-delete-size);
 
     display: flex;
     justify-content: center;
@@ -283,22 +281,63 @@ main {
     background: white;
     cursor: pointer;
 }
-
-    .question-answer-delete:hover {
+    .answer-delete:hover {
         background: var(--glv-red);
     }
 
-.question-answer-delete img{
+.answer-delete img{
     opacity: .5;
     height: 50%;
     filter: invert(0);
 }
-    .question-answer-delete:hover img{
+    .answer-delete:hover img{
         opacity: 1;
         filter: invert(1);
     }
 
+/************************/
+/*DELETE QUESTION BUTTON*/
+/************************/
+.question-delete-wrapper {
+    display: flex;
+    margin-top: 20px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.question-delete {
+    transition: all .2s;
+    border-radius: 50%;
+    height: var(--question-delete-size);
+    width: var(--question-delete-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--glv-black);
+    cursor: pointer;
+
+    -webkit-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+    -moz-box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+    box-shadow: 0px 0px 7px -2px rgba(34, 60, 80, 0.6);
+}
+    .question-delete:hover {
+        background: #cc3d00;
+    }
+
+.question-delete img{
+    height: 50%;
+    filter: invert(1);
+}
+    .question-delete:hover img{
+        opacity: 1;
+        filter: invert(1);
+    }
+
+/************************/
 /*CONTENT EDITABLE SETTINGS*/
+/************************/
 [contentEditable]:focus {
     outline: none;
 }
@@ -309,32 +348,24 @@ main {
     content:attr(myPlaceholder);
 }
 
+/************************/
 /*MOBILE STYLES*/
+/************************/
 @media (max-device-width: 600px) {
-    @keyframes addElement {
-        0% {
-            opacity: 0;
-            max-height: 0px;
-        }
-        15% {
-            opacity: 1;
-            max-height: 150px;
-        }
-        100% {
-            max-height: 3000px;
-        }
+    :root {
+        --question-delete-size: 100px;
+        --answer-delete-size: 60px;
     }
 
     header h1{
-        text-align: center;
-        margin: 0 0 3vh;
+        margin: 0 0 30px;
         font-size: 70px;
-        overflow-wrap: break-word;
     }
     .main-wrapper {
         padding: 0 90px;
         width: 90vw;
         gap: 50px;
+        font-size: 30pt;
     }
 
     .add-button {
@@ -363,77 +394,38 @@ main {
             color: white;
         }
 
-        .button-text {
-            font-size: 30pt;
-        }
-
-    .another-wrapper {
-        margin-right: -90px;
+    .question-button-wrapper {
+        --gap: 20px;
     }
-
     .question-wrapper {
         border-radius: 50px;
-        box-shadow: 0px 0px 15px -2px rgba(34, 60, 80, 0.6);
+        box-shadow: 0 0 15px -2px rgba(34, 60, 80, 0.6);
     }
-
-    .question-answer-wrapper {
+    .question-title {
+        padding: 20px 25px;
+    }
+    .answer-button-wrapper {
         margin: 20px 30px 30px 30px;
         gap: 20px
     }
 
-    .question-answer {
+    .answer-wrapper {
         border-radius: 75px;
         gap: 20px;
         padding: 20px;
     }
 
-    .question-title {
-        padding: 20px 25px;
-        background: var(--glv-black);
-        text-align: center;
-
-        color: white;
-        font-weight: normal;
-        font-size: medium;
-        font-style: italic;
-    }
-
-    .question-answer-delete {
-        height: 60px;
-        width: 60px;
-    }
-
-    .delete-question-wrapper{
+    .question-delete-wrapper{
         margin-top: 30px;
     }
+
     .question-delete {
-        height: 90px;
-        width: 90px;
         box-shadow: 0px 0px 15px -2px rgba(34, 60, 80, 0.6);
     }
 
-    .question-title {
-        font-size: 30pt;
-    }
-
-    .question-answer-text {
-        font-size: 30pt;
-    }
-
-    .question-answer-checkbox {
+    .answer-checkbox {
         height: 40px;
         width: 40px;
-    }
-
-    .add-button {
-        font-size: 30pt;
-    }
-
-    .button-add-icon {
-        font-style: normal;
-        font-weight: 300;
-        font-size: 30pt;
-        display: flex;
     }
 }
 
