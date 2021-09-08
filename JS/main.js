@@ -1,8 +1,15 @@
 const addQuestion = function () {
   const mainWrapper = $('.main-wrapper');
-  let questionMarkup = getQuestionMarkup("",[""]);
+  let questionMarkup = getQuestionMarkup("",[""])
   $(mainWrapper).children(':last-child').before(questionMarkup);
 }
+
+const addQuestionWithMarkup = function (markup) {
+  const mainWrapper = $('.main-wrapper');
+  let questionMarkup = markup;
+  $(mainWrapper).children(':last-child').before(questionMarkup);
+}
+
 const deleteQuestion = function() {
   const parent = $(this).parent().parent();
   $(parent).css("-webkit-animation","delete .3s");
@@ -91,6 +98,10 @@ const getQuestionMarkup = function(title = "", answers = []) {
 
   return htmlAnswer;
 }
+
+addQuestionWithMarkup(getQuestionMarkup("Ваш пол",["Мужчина","Женщина","Не указано"]));
+addQuestionWithMarkup(getQuestionMarkup(" Кто заботится о ваших питомцах?",["Я","Партнер","Родители","Дети"]));
+
 
 $(document).on('click','.add-question',addQuestion);
 $(document).on('click','.question-delete',deleteQuestion);
