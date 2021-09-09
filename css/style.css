@@ -6,6 +6,8 @@
 
     --question-delete-size: 40px;
     --answer-delete-size: 25px;
+
+    --border-thickness: 1.5px;
 }
 * {
     padding: 0;
@@ -154,8 +156,8 @@ main {
     display: flex;
     gap: 1.5vh;
     align-items: center;
-    border: gray 0.2vh solid;
-    border-radius: 25px;
+    border: gray var(--border-thickness) solid;
+    border-radius: 100vh;
     padding: 1.5vh;
 }
 
@@ -197,7 +199,7 @@ main {
 .answer-checkbox {
     transition: all .2s;
     border-radius: 50%;
-    border: gray 0.2vh solid;
+    border: gray var(--border-thickness) solid;
     height: 15px;
     width: 15px;
 }
@@ -211,7 +213,7 @@ main {
     width: 100%;
     color: gray;
 
-    border: gray 0.2vh solid;
+    border: gray var(--border-thickness) solid;
     padding: 1.5vh;
     border-radius: 25px;
     cursor: pointer;
@@ -355,6 +357,7 @@ main {
     :root {
         --question-delete-size: 100px;
         --answer-delete-size: 60px;
+        --border-thickness: 3px;
     }
 
     header h1{
@@ -410,7 +413,6 @@ main {
     }
 
     .answer-wrapper {
-        border-radius: 75px;
         gap: 20px;
         padding: 20px;
     }
